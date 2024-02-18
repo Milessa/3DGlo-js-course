@@ -2,10 +2,13 @@
 
 const menu = () => {
   const handleMenu = (e) => {
-    if (e.target.closest(".menu") || e.target.closest('[href^="#"]')) {
+    const displayMenu = () => {
       document.querySelector("menu").classList.toggle("active-menu");
-    } else if (e.target.matches(".close-btn") || !e.target.closest("menu")) {
-      document.querySelector("menu").classList.remove("active-menu");
+    };
+    if (e.target.closest(".menu") || e.target.closest("menu")) {
+      displayMenu();
+    } else if (e.target.closest("menu") || e.target.closest('li>[href^="#"]')) {
+      displayMenu();
     }
   };
 
