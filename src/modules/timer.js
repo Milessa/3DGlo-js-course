@@ -4,6 +4,8 @@ const timer = (deadline) => {
   const timerMinutes = document.getElementById("timer-minutes");
   const timerSeconds = document.getElementById("timer-seconds");
 
+  let idInterval = 0;
+
   const getTimeRemaining = () => {
     let dateStop = new Date(deadline).getTime();
     let dateNow = new Date().getTime();
@@ -41,7 +43,7 @@ const timer = (deadline) => {
     }
   };
   updateClock();
-  setInterval(updateClock, 1000);
+  idInterval = setInterval(updateClock, 1000);
 };
 
 export default timer;
