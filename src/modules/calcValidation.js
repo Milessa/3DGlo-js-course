@@ -1,26 +1,49 @@
 "use strict";
-const calcValidation = () => {
-  const calcItems = document.querySelectorAll(".calc-block>input"),
-    calcBlock = document.querySelector(".calc-block"),
+const calcValidation = (price = 100) => {
+  const calcBlock = document.querySelector(".calc-block"),
+    calcType = document.querySelector(".calc-type"),
     calcSquare = document.querySelector(".calc-square"),
-    calcDay = document.querySelector(".calc-day"),
     calcCount = document.querySelector(".calc-count"),
-    totalValue = document.getElementById("total");
+    calcDay = document.querySelector(".calc-day"),
+    total = document.getElementById("total");
 
-  calcItems.forEach((calcItem) => {
-    calcItem.addEventListener("input", () => {
-      const isPattern = /\d/g;
-      if (!isPattern.test(calcItem.value)) {
-        alert("Разрешается только ввод цифр");
-        calcItem.value = "";
-      }
-    });
-  });
+  const countCalc = () => {
+    const calcTypeValue = +calcType.options[calcType.selectedIndex].value,
+      calcSquareValue = calcSquare.value;
 
-  calcBlock.addEventListener("change", () => {
-    let sum = 0;
-    sum = +calcCount.value + +calcDay.value + +calcSquare.value;
-    totalValue.textContent = sum;
+    let totalValue = 0,
+      calcCountValue = 1,
+      calcDayValue = 1;
+
+    if (calcCount.value > 1) {
+      calcCountValue += +calcCount.value / 10;
+    }
+
+    if (calcDay.value && calcDay.value < 5) {
+      calcDayValue = 2;
+    } else if (calcDay.value && calcDay.value < 10) {
+      calcDayValue = 1.5;
+    }
+
+    if (calcType.value && calcSquare.value) {
+      totalValue =
+        price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue;
+    } else {
+      totalValue = 0;
+    }
+
+    total.textContent = totalValue;
+  };
+
+  calcBlock.addEventListener("input", (e) => {
+    if (
+      e.target === calcType ||
+      e.target === calcSquare ||
+      e.target === calcCount ||
+      e.target === calcDay
+    ) {
+      countCalc();
+    }
   });
 };
 
