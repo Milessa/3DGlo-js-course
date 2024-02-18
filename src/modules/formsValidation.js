@@ -32,44 +32,36 @@ const formsValidation = () => {
   };
 
   forms.addEventListener("input", () => {
-    forms.onblur = () => {
-      event.target.value = event.target.value.replace(/[^[а-яА-Я \-]*/g, "");
-      //Разрешается только ввод кириллицы в любом регистре, дефиса и пробела
-      callAfterValidation(forms);
-    };
+    event.target.value = event.target.value.replace(/[^[а-яА-Я \-]*/g, "");
+    //Разрешается только ввод кириллицы в любом регистре, дефиса и пробела
+    callAfterValidation(forms);
   });
 
   userName.forEach((e) => {
     e.addEventListener("input", () => {
-      e.onblur = () => {
-        event.target.value = event.target.value.replace(/[^[а-яА-Я \-]*/g, "");
-        //Разрешается только ввод кириллицы в любом регистре, дефиса и пробела
+      event.target.value = event.target.value.replace(/[^[а-яА-Я \-]*/g, "");
+      //Разрешается только ввод кириллицы в любом регистре, дефиса и пробела
 
-        callAfterValidation(e);
-      };
+      callAfterValidation(e);
     });
   });
 
   userEmail.forEach((e) => {
     e.addEventListener("input", () => {
-      e.onblur = () => {
-        event.target.value = event.target.value.replace(
-          /[^[a-zA-Z_@.!~*' \-]*/g,
-          ""
-        );
-        //Разрешается только ввод латиницы в любом регистре и спецсимволы:  @  -  _  . ! ~ * '
-        afterValidationSH(e);
-      };
+      event.target.value = event.target.value.replace(
+        /[^[a-zA-Z_@.!~*' \-]*/g,
+        ""
+      );
+      //Разрешается только ввод латиницы в любом регистре и спецсимволы:  @  -  _  . ! ~ * '
+      afterValidationSH(e);
     });
   });
 
   userPhone.forEach((e) => {
     e.addEventListener("input", () => {
-      e.onblur = () => {
-        event.target.value = event.target.value.replace(/[^[0-9()-]*/g, "");
-        //Разрешается только ввод цифр, круглых скобок и дефис
-        afterValidationSH(e);
-      };
+      event.target.value = event.target.value.replace(/[^[0-9()-]*/g, "");
+      //Разрешается только ввод цифр, круглых скобок и дефис
+      afterValidationSH(e);
     });
   });
 };
