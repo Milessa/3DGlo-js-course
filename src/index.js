@@ -1,5 +1,3 @@
-import fileOne from "./modules/one";
-import fileTwo from "./modules/two";
+import timer from "./modules/timer";
 
-fileOne();
-fileTwo();
+timer("20 november 2021");

@@ -1,5 +1,5 @@
-const fileTwo = () => {
+const two = () => {
   console.log("File two.js");
 };
 
-export default fileTwo;
+export default two;
