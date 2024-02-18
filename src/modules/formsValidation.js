@@ -5,32 +5,71 @@ const formsValidation = () => {
     userEmail = document.querySelectorAll(".form-email"),
     userPhone = document.querySelectorAll(".form-phone");
 
+  let callAfterValidation = () => {
+    afterValidationSH();
+    afterValidationText();
+  };
+
+  let afterValidationText = () => {
+    event.target.value =
+      event.target.value.charAt(0).toUpperCase() +
+      event.target.value.substr(1).toLowerCase();
+    //Первая буква каждого слова должна приводиться к верхнему регистру, а все остальные — к нижнему
+  };
+
+  let afterValidationSH = (e) => {
+    //Несколько идущих подряд пробелов должны заменяться на один
+    event.target.value = event.target.value
+      .replace(/\s+/g, " ")
+      .replace(/^\s*|\s*$/g, "");
+    //Пробелы в начале и конце значения должны удаляться
+
+    //Несколько идущих подряд дефисов должны заменяться на один
+    event.target.value = event.target.value
+      .replace(/-+/g, "-")
+      .replace(/^\-*|\-*$/g, "");
+    //Дефисы в начале и конце значения должны удаляться
+  };
+
   forms.addEventListener("input", () => {
-    event.target.value = event.target.value.replace(/[^[а-яА-Я \-]*/g, "");
-    //Разрешается только ввод кириллицы в любом регистре, дефиса и пробела
+    forms.onblur = () => {
+      event.target.value = event.target.value.replace(/[^[а-яА-Я \-]*/g, "");
+      //Разрешается только ввод кириллицы в любом регистре, дефиса и пробела
+      callAfterValidation(forms);
+    };
   });
 
   userName.forEach((e) => {
     e.addEventListener("input", () => {
-      event.target.value = event.target.value.replace(/[^[а-яА-Я \-]*/g, "");
-      //Разрешается только ввод кириллицы в любом регистре, дефиса и пробела
+      e.onblur = () => {
+        event.target.value = event.target.value.replace(/[^[а-яА-Я \-]*/g, "");
+        //Разрешается только ввод кириллицы в любом регистре, дефиса и пробела
+
+        callAfterValidation(e);
+      };
     });
   });
 
   userEmail.forEach((e) => {
     e.addEventListener("input", () => {
-      event.target.value = event.target.value.replace(
-        /[^[a-zA-Z_@.!~*' \-]*/g,
-        ""
-      );
-      //Разрешается только ввод латиницы в любом регистре и спецсимволы:  @  -  _  . ! ~ * '
+      e.onblur = () => {
+        event.target.value = event.target.value.replace(
+          /[^[a-zA-Z_@.!~*' \-]*/g,
+          ""
+        );
+        //Разрешается только ввод латиницы в любом регистре и спецсимволы:  @  -  _  . ! ~ * '
+        afterValidationSH(e);
+      };
     });
   });
 
   userPhone.forEach((e) => {
     e.addEventListener("input", () => {
-      event.target.value = event.target.value.replace(/[^[0-9()-]*/g, "");
-      //Разрешается только ввод цифр, круглых скобок и дефис
+      e.onblur = () => {
+        event.target.value = event.target.value.replace(/[^[0-9()-]*/g, "");
+        //Разрешается только ввод цифр, круглых скобок и дефис
+        afterValidationSH(e);
+      };
     });
   });
 };

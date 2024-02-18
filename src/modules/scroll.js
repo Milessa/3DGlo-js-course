@@ -5,9 +5,11 @@ const scroll = () => {
     anchor.addEventListener("click", function (e) {
       e.preventDefault();
 
-      document.querySelector(this.getAttribute("href")).scrollIntoView({
-        behavior: "smooth",
-      });
+      if (!e.target.classList.contains("close-btn")) {
+        document.querySelector(this.getAttribute("href")).scrollIntoView({
+          behavior: "smooth",
+        });
+      }
     });
   });
 };

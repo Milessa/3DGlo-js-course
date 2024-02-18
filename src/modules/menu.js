@@ -1,22 +1,18 @@
 "use strict";
 
 const menu = () => {
-  const menuBtn = document.querySelector(".menu");
-  const menu = document.querySelector("menu");
-  const closeBtn = menu.querySelector(".close-btn");
-  const menuItems = menu.querySelectorAll("ul>li>a");
-
-  const handleMenu = () => {
-    menu.classList.toggle("active-menu");
+  const handleMenu = (e) => {
+    const displayMenu = () => {
+      document.querySelector("menu").classList.toggle("active-menu");
+    };
+    if (e.target.closest(".menu") || e.target.closest("menu")) {
+      displayMenu();
+    } else if (!e.target.closest("menu") && e.target.closest('[href^="#"]')) {
+      displayMenu();
+    }
   };
 
-  menuBtn.addEventListener("click", handleMenu);
-
-  closeBtn.addEventListener("click", handleMenu);
-
-  menuItems.forEach((menuItem) =>
-    menuItem.addEventListener("click", handleMenu)
-  );
+  document.body.addEventListener("click", handleMenu);
 };
 
 export default menu;

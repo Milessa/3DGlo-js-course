@@ -3,7 +3,6 @@
 const modal = () => {
   const popup = document.querySelector(".popup"),
     popupBtn = document.querySelectorAll(".popup-btn"),
-    closeBtn = popup.querySelector(".popup-close"),
     popupContent = popup.querySelector(".popup-content"),
     popupData = {
       count: -450,
@@ -22,6 +21,15 @@ const modal = () => {
     });
   });
 
+  popup.addEventListener("click", (e) => {
+    if (
+      !e.target.closest(".popup-content") ||
+      e.target.classList.contains("popup-close")
+    ) {
+      popup.style.display = "none";
+    }
+  });
+
   const showPopup = () => {
     popupData.startPos > popupData.endPos
       ? (popupData.count -= popupData.speed)
@@ -36,10 +44,6 @@ const modal = () => {
       requestAnimationFrame(showPopup);
     }
   };
-
-  closeBtn.addEventListener("click", () => {
-    popup.style.display = "none";
-  });
 };
 
 export default modal;
