@@ -7,8 +7,9 @@ import formsValidation from "./modules/formsValidation";
 import tabs from "./modules/tabs";
 import addDot from "./modules/addDots";
 import slider from "./modules/slider";
+import sendForm from "./modules/sendForm";
 
-timer("20 november 2021");
+timer("10 december 2021");
 menu();
 modal();
 scroll();
@@ -17,3 +18,4 @@ formsValidation();
 tabs();
 addDot();
 slider();
+sendForm();
