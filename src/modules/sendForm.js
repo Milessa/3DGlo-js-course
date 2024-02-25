@@ -1,5 +1,4 @@
 "use strict";
-import { unBlockBody } from "./helpers";
 
 const sendForm = () => {
   const sendData = (data) => {
@@ -14,19 +13,27 @@ const sendForm = () => {
     const statusMessage = document.createElement("div");
 
     const showStatus = (status) => {
+      const img = document.createElement("img");
       const statusList = {
         load: {
-          message: "Загрузка...",
+          message: " Загрузка...",
+          img: "./images/message/waiting.gif",
         },
         error: {
-          message: "Что-то пошло не так...",
+          message: " Что-то пошло не так...",
+          img: "./images/message/error.png",
         },
         success: {
-          message: "Спасибо. Наш менеджер скоро с вами свяжемся!",
+          message: " Спасибо. Наш менеджер скоро с вами свяжемся!",
+          img: "./images/message/success.png",
         },
       };
 
       statusMessage.textContent = statusList[status].message;
+      img.src = statusList[status].img;
+      img.height = 35;
+
+      statusMessage.insertBefore(img, statusMessage.firstChild);
     };
 
     statusMessage.style.cssText = "font-size: 2rem; color: #fff";
@@ -53,9 +60,6 @@ const sendForm = () => {
           });
           setTimeout(() => {
             document.querySelector(".popup").style.display = "none";
-
-            form.removeChild(statusMessage);
-            unBlockBody();
           }, 2000);
         })
         .catch((error) => {

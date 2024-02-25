@@ -1,6 +1,6 @@
 "use strict";
 
-import { animate, blockBody, unBlockBody } from "./helpers";
+import { animate } from "./helpers";
 
 const modal = () => {
   const popup = document.querySelector(".popup"),
@@ -11,13 +11,12 @@ const modal = () => {
     btn.addEventListener("click", () => {
       popup.style.display = "block";
       animate({
-        duration: 500,
+        duration: 1000,
         timing(timeFraction) {
           return timeFraction;
         },
         draw(progress) {
           popupContent.style.top = 25 * progress + "%";
-          blockBody();
         },
       });
     });
@@ -29,7 +28,6 @@ const modal = () => {
       e.target.classList.contains("popup-close")
     ) {
       popup.style.display = "none";
-      unBlockBody();
     }
   });
 };
